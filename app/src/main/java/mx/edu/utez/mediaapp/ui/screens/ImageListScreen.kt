@@ -15,8 +15,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.ejemplo.mediaapp.data.MediaItem
-import com.ejemplo.mediaapp.viewmodel.MediaViewModel
+import mx.edu.utez.mediaapp.ui.data.MediaItem
+import mx.edu.utez.mediaapp.viewmodel.MediaViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
