@@ -1,17 +1,19 @@
-// Define el alias para el plugin KSP
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.ksp)
+    alias(libs.plugins.kotlin.compose)
 }
+
 android {
-    namespace = "com.ejemplo.mediaapp" // Asegúrate que sea tu namespace
-    compileSdk = 36
+    namespace = "mx.edu.utez.mediaapp"
+    compileSdk = 34
+
     defaultConfig {
-        applicationId = "com.ejemplo.mediaapp" // Asegúrate que sea tu namespace
+        applicationId = "mx.edu.utez.mediaapp"
         minSdk = 26
-        targetSdk = 36
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -19,6 +21,7 @@ android {
             useSupportLibrary = true
         }
     }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -38,45 +41,45 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.10" // Ajusta si es necesario
-    }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-
-    }
 }
+
 dependencies {
-// Core y Lifecycle
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat) // Necesario para ExoPlayer UI
+    implementation(libs.androidx.appcompat)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.activity.compose)
-// Compose BOM y dependencias
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-// Room (Base de datos)
+    // Iconos extendidos para QueueMusic y otros
+    implementation("androidx.compose.material:material-icons-extended:1.6.0")
+
+    // Navigation
+    implementation("androidx.navigation:navigation-compose:2.7.7")
+
+    // Room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
-// DataStore (Preferencias)
+
+    // DataStore
     implementation(libs.androidx.datastore.preferences)
-// ExoPlayer (Audio/Video)
+
+    // ExoPlayer
     implementation(libs.androidx.media3.exoplayer)
     implementation(libs.androidx.media3.ui)
-// Coil (Imágenes)
+
+    // Coil
     implementation(libs.coil.compose)
-// Accompanist (Carrusel)
+
+    // Accompanist (Opcional si usas carrusel)
     implementation(libs.accompanist.pager)
     implementation(libs.accompanist.pager.indicators)
-// Test
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

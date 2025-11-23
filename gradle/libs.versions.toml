@@ -48,3 +48,4 @@ accompanist-pager-indicators = { module = "com.google.accompanist:accompanist-pa
 android-application = { id = "com.android.application", version = "8.4.1" } # Ajusta esta versión
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
