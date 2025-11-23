@@ -14,10 +14,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.ejemplo.mediaapp.data.MediaItem
-import com.ejemplo.mediaapp.viewmodel.MediaViewModel
-import com.ejemplo.mediaapp.viewmodel.PlaybackViewModel
+import mx.edu.utez.mediaapp.ui.data.MediaItem
+import mx.edu.utez.mediaapp.viewmodel.MediaViewModel
+import mx.edu.utez.mediaapp.viewmodel.PlaybackViewModel
 import java.util.concurrent.TimeUnit
+import androidx.compose.material.icons.filled.AcUnit
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -93,14 +94,24 @@ fun AudioCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
-            .clickable(onClick = onPlayClick), // Permite hacer click en toda la tarjeta
-        elevation = CardDefaults.cardElevation(2.dp)
+            .padding(horizontal = 16.dp, vertical = 8.dp) // Más margen lateral
+            .clickable(onClick = onPlayClick),
+        // Forma personalizada: esquinas muy redondeadas
+        shape = androidx.compose.foundation.shape.RoundedCornerShape(24.dp),
+        colors = CardDefaults.cardColors(
+            // Usamos un color de superficie variante o uno específico
+            containerColor = MaterialTheme.colorScheme.surface,
+        ),
+        // Borde neón si está sonando
+        border = if (isPlaying)
+            androidx.compose.foundation.BorderStroke(2.dp, MaterialTheme.colorScheme.primary)
+        else null,
+        elevation = CardDefaults.cardElevation(8.dp)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(20.dp), // Más padding interno
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -108,21 +119,29 @@ fun AudioCard(
                 Text(
                     text = item.name,
                     style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 Spacer(Modifier.height(4.dp))
                 Text(
                     text = formatDuration(item.duration),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = Color.Gray
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.secondary // Color de acento
                 )
             }
             Spacer(Modifier.width(16.dp))
-            IconButton(onClick = onPlayClick) {
+
+            // Botón Circular
+            FilledIconButton(
+                onClick = onPlayClick,
+                colors = IconButtonDefaults.filledIconButtonColors(
+                    containerColor = if (isPlaying) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
+                )
+            ) {
                 Icon(
                     imageVector = if (isPlaying) Icons.Default.Pause else Icons.Default.PlayArrow,
                     contentDescription = if (isPlaying) "Pausar" else "Reproducir",
-                    tint = if (isPlaying) Color.Red else MaterialTheme.colorScheme.primary
+                    tint = MaterialTheme.colorScheme.onPrimary
                 )
             }
         }

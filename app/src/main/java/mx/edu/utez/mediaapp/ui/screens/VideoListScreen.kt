@@ -15,9 +15,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.ejemplo.mediaapp.Screen
-import com.ejemplo.mediaapp.data.MediaItem
-import com.ejemplo.mediaapp.viewmodel.MediaViewModel
+import mx.edu.utez.mediaapp.Screen
+import mx.edu.utez.mediaapp.ui.data.MediaItem
+import mx.edu.utez.mediaapp.viewmodel.MediaViewModel
 import java.util.concurrent.TimeUnit
 
 @OptIn(ExperimentalMaterial3Api::class)
